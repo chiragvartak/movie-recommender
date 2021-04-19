@@ -46,20 +46,21 @@ def predict(user_id):
     sorted_score_movieid_pairs = sorted(zip(predicted_labels, test_items), reverse=True)
     top_10_sorted_score_movieid_pairs = sorted_score_movieid_pairs[:10]
     top10_items = [m for s,m in top_10_sorted_score_movieid_pairs]
-    print("User interacted with Movie id: ", i)
-    print("Movie recommendations for User id: ", u)
-    print(top10_items)
+    # print("User interacted with Movie id: ", i)
+    # print("Movie recommendations for User id: ", u)
+    # print(top10_items)
     if i in top10_items:
         hits.append(1)
     else:
         hits.append(0)
 
     hit_ratio = np.average(hits)
-    print("The Hit Ratio @ 10 is {:.2f}".format(hit_ratio))
+    # print("The Hit Ratio @ 10 is {:.2f}".format(hit_ratio))
 
     return {
         "user_id": str(u),
-        "latest_interacted_movie": str(i),
+        "latest_interacted_movie_id": str(i),
+        "latest_interacted_movie_title": get_movie_title_from_id(i),
         "scores": [("%.4f" % s) for s,m in sorted_score_movieid_pairs[:10]],
         "movie_ids": [str(m) for s,m in sorted_score_movieid_pairs[:10]],
         "movie_names": [get_movie_title_from_id(m) for s,m in top_10_sorted_score_movieid_pairs],
@@ -69,35 +70,14 @@ def predict(user_id):
 class User(Resource):
     def get(self):
         parser = reqparse.RequestParser()  # initialize
-
         parser.add_argument('userId', required=True)  # add args
-
         args = parser.parse_args()  # parse arguments to dictionary
-
-        a = int(args['userId'])
-        print(a)
-        print(type(a))
-        # return predict(a)
-        return predict(a)
+        user_id = int(args['userId'])
+        return predict(user_id)
 
 
 if __name__ == "__main__":
-    USER_ID = 178
-
-    predictions = predict(178)
-    pprint(predictions)
-
-    predictions = predict(178)
-    pprint(predictions)
-
-    predictions = predict(178)
-    pprint(predictions)
-
-
-
     app = Flask(__name__)
     api = Api(app)
-
     api.add_resource(User, '/users')  # '/users' is our entry point
-
     app.run()
