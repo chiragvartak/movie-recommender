@@ -8,6 +8,7 @@ from pprint import pprint
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 import ast
+from hybrid.predict import HybridUser, AllHybridUsers
 
 np.random.seed(123)
 
@@ -67,7 +68,7 @@ def predict(user_id):
         "hit_ratio": "%.4f" % hit_ratio
     }
 
-class User(Resource):
+class Ncf(Resource):
     def get(self):
         parser = reqparse.RequestParser()  # initialize
         parser.add_argument('userId', required=True)  # add args
@@ -79,5 +80,7 @@ class User(Resource):
 if __name__ == "__main__":
     app = Flask(__name__)
     api = Api(app)
-    api.add_resource(User, '/users')  # '/users' is our entry point
+    api.add_resource(Ncf, '/ncf')  # '/users' is our entry point
+    api.add_resource(HybridUser, '/hybrid')
+    api.add_resource(AllHybridUsers, '/hybridusers')
     app.run()
