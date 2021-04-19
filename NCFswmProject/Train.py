@@ -60,7 +60,7 @@ def main():
 
     model = NCFModel.NCF(num_users, num_items, train_ratings, all_movieIds)
 
-    trainer = pl.Trainer(max_epochs=5, gpus=1, reload_dataloaders_every_epoch=True,
+    trainer = pl.Trainer(max_epochs=5, gpus=None, reload_dataloaders_every_epoch=True,
                          progress_bar_refresh_rate=50, logger=False, checkpoint_callback=False)
 
     trainer.fit(model)
