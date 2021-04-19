@@ -5,6 +5,9 @@ from tqdm import tqdm
 import NCFModel
 import pytorch_lightning as pl
 from pprint import pprint
+from flask import Flask
+from flask_restful import Resource, Api, reqparse
+import ast
 
 np.random.seed(123)
 
@@ -23,12 +26,12 @@ def get_movie_title_from_id(movie_id):
     return movies[movies['movieId'] == movie_id].iloc[0]['title']
 
 def predict(user_id):
-    global test_ratings
+    np.random.seed(123)
     # test_ratings = test_ratings[177:178]
-    test_ratings = test_ratings.loc[test_ratings["userId"] == user_id]
+    filtered_test_ratings = test_ratings.loc[test_ratings["userId"] == user_id]
 
     # User-item pairs for testing
-    test_user_item_set = set(zip(test_ratings['userId'], test_ratings['movieId']))
+    test_user_item_set = set(zip(filtered_test_ratings['userId'], filtered_test_ratings['movieId']))
 
     hits = []
     user_and_item = list(test_user_item_set)[0]
@@ -55,13 +58,27 @@ def predict(user_id):
     print("The Hit Ratio @ 10 is {:.2f}".format(hit_ratio))
 
     return {
-        "user_id": u,
-        "latest_interacted_movie": i,
-        "scores": [s for s,m in sorted_score_movieid_pairs[:10]],
-        "movie_ids": [m for s,m in sorted_score_movieid_pairs[:10]],
+        "user_id": str(u),
+        "latest_interacted_movie": str(i),
+        "scores": [("%.4f" % s) for s,m in sorted_score_movieid_pairs[:10]],
+        "movie_ids": [str(m) for s,m in sorted_score_movieid_pairs[:10]],
         "movie_names": [get_movie_title_from_id(m) for s,m in top_10_sorted_score_movieid_pairs],
-        "hit_ratio": hit_ratio
+        "hit_ratio": "%.4f" % hit_ratio
     }
+
+class User(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()  # initialize
+
+        parser.add_argument('userId', required=True)  # add args
+
+        args = parser.parse_args()  # parse arguments to dictionary
+
+        a = int(args['userId'])
+        print(a)
+        print(type(a))
+        # return predict(a)
+        return predict(a)
 
 
 if __name__ == "__main__":
@@ -69,3 +86,18 @@ if __name__ == "__main__":
 
     predictions = predict(178)
     pprint(predictions)
+
+    predictions = predict(178)
+    pprint(predictions)
+
+    predictions = predict(178)
+    pprint(predictions)
+
+
+
+    app = Flask(__name__)
+    api = Api(app)
+
+    api.add_resource(User, '/users')  # '/users' is our entry point
+
+    app.run()
