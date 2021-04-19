@@ -9,7 +9,7 @@ np.random.seed(123)
 
 
 def main():
-    ratings = pd.read_csv('ratings.csv', parse_dates=['timestamp'], nrows=5000000)
+    ratings = pd.read_csv('../ratings.csv', parse_dates=['timestamp'], nrows=5000000)
     # ratings = pd.read_csv('ratings.csv', parse_dates=['timestamp'])
 
     # rand_userIds = np.random.choice(ratings['userId'].unique(),

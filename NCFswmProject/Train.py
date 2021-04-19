@@ -8,7 +8,7 @@ import pytorch_lightning as pl
 np.random.seed(123)
 
 def main():
-    ratings = pd.read_csv('ratings.csv', parse_dates=['timestamp'], nrows=5000000)
+    ratings = pd.read_csv('../ratings.csv', parse_dates=['timestamp'], nrows=5000000)
 
     # train test split starts here
     ratings['timestamp'] = ratings['timestamp'].astype(int)
