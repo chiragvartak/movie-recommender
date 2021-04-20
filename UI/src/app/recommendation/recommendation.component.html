@@ -1,0 +1,86 @@
+<p>
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Movie Recommendation App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="goBack()">
+      <mat-icon class="material-icons-outlined">exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+<div class="movie-result-container" id="result-container">
+  <div class="content">
+    <div id="current-movie-name"></div><br />
+    <div>Score: <span id="current-movie-score"></span> </div>
+  </div>
+</div>
+
+<div class="results-section">
+  <div id="hybrid-recommendation-conatiner" *ngIf="hybridMovies">
+    <div class="section-heading">
+      Top Hybrid Recommendations
+    </div>
+
+    <div>
+      <div class="recommendation-list" id="hybrid-container">
+        <div class="content-container" id="hybrid-content">
+          <div *ngFor="let name of hybridMovies.movie_names; let i = index" class="movie-tile" (click)="displayContent(i, 1)">
+            <img [src]="getImgSrc(name)" width="100%" height="100%">
+            <div class="movie-name">{{name}}</div>
+            <div class="score">Score: {{hybridMovies.scores[i]}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="back-btn-container">
+        <button mat-mini-fab class="back-btn" [disabled]="checkDisabledLeft(1)" id="backBtn1" (click)="scrollLeft(1)">
+          <mat-icon><span class="material-icons-outlined">
+              arrow_back_ios
+            </span></mat-icon>
+        </button>
+      </div>
+      <div class="forward-btn-container">
+        <button mat-mini-fab class="forward-btn" [disabled]="checkDisabledRight(1)" id="fwdBtn1"
+          (click)="scrollRight(1)">
+          <mat-icon><span class="material-icons-outlined">
+              arrow_forward_ios
+            </span></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="ncf-container" *ngIf="ncfMovies">
+    <div class="section-heading" style="margin-top: 10px;">
+      Top NCF Recommendations
+    </div>
+
+    <div class="nfs-results">
+      <div class="recommendation-list" id="nsf-container">
+        <div class="content-container" id="nsf-content">
+          <div *ngFor="let name of ncfMovies.movie_names; let i = index" class="movie-tile" (click)="displayContent(i, 2)">
+            <img [src]="getImgSrc(name)" width="100%" height="100%">
+            <div class="movie-name">{{name}}</div>
+            <div class="score">Score: {{ncfMovies.scores[i]}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="back-btn-container">
+        <button mat-mini-fab [disabled]="checkDisabledLeft(2)" class="back-btn" id="backBtn2" (click)="scrollLeft(2)">
+          <mat-icon><span class="material-icons-outlined">
+              arrow_back_ios
+            </span></mat-icon>
+        </button>
+      </div>
+      <div class="forward-btn-container">
+        <button mat-mini-fab [disabled]="checkDisabledRight(2)" class="forward-btn" id="fwdBtn2"
+          (click)="scrollRight(2)">
+          <mat-icon><span class="material-icons-outlined">
+              arrow_forward_ios
+            </span></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div>Footer</div>
+</div>

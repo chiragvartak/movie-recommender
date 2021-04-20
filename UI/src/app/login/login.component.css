@@ -1,0 +1,15 @@
+.center-pos {
+  position: absolute;
+  top: calc(50% - 95px);
+  left: 40%;
+  width: 20%;
+}
+
+.user-id-field {
+width: 80%;
+left: 10%;
+}
+
+.go-btn {
+left: calc(50% - 32px);
+}

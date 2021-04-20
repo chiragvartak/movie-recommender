@@ -1,0 +1,13 @@
+<mat-card class="center-pos mat-card-elevation-z4">
+  <mat-card-header class="card-header">
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="user-id-field">
+      <mat-label>Enter the User Id</mat-label>
+      <input type="text" matInput [(ngModel)]="userId">
+    </mat-form-field>
+    <br/>
+    <button mat-raised-button color="primary" class="go-btn" (click)="getRecommendationsById()">Go</button>
+  </mat-card-content>
+</mat-card>
