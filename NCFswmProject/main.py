@@ -6,6 +6,7 @@ import NCFModel
 import pytorch_lightning as pl
 from pprint import pprint
 from flask import Flask
+from flask_cors import CORS, cross_origin
 from flask_restful import Resource, Api, reqparse
 import ast
 from hybrid.predict import HybridUser, AllHybridUsers
@@ -79,6 +80,8 @@ class Ncf(Resource):
 
 if __name__ == "__main__":
     app = Flask(__name__)
+    CORS(app, resources={r'/*': {'origins': '*'}})
+    app.config['CORS_HEADERS'] = 'Content-Type'
     api = Api(app)
     api.add_resource(Ncf, '/ncf')  # '/users' is our entry point
     api.add_resource(HybridUser, '/hybrid')
