@@ -63,20 +63,15 @@ a 64-bit installation. PyTorch does not work on a 32-bit Python installation on 
 ### Install the dependencies
 
 1. Install Node.js from: https://nodejs.org/en/download/
-2. Open terminal in the "code/UI" folder and run command "npm install" to install all the dependent packages.
+2. Open terminal in `code/UI` folder and run the command `npm install` to install all the dependent packages.
 
 ### Run the app
 
-1. Open terminal in the "code/UI" folder and run command "ng serve", this will run the application and serve it on Port : 4200
+1. Open terminal in the `code/UI` folder and run the command `ng serve`, this will run the application and serve it on Port : 4200
 2. Open your browser and navigate to http://localhost:4200
 
 ### User Id's for testing
 
 When you open the UI application, you will be required to enter the User Id for the user you want to get the recommendations for.
 
-If you use the pre-trained model files, you could use the following user id's to get both NCF and Hybrid recommendations:
-
-1. 2103
-2. 5413
-3. 12
-4. 18768
+If you use the pre-trained model files, you could use the following user id's to get both NCF and Hybrid recommendations: `2103, 5413, 12, 18768`.
