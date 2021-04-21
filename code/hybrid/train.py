@@ -13,9 +13,9 @@ from surprise.model_selection import train_test_split
 from surprise.model_selection import KFold
 from collections import defaultdict
 
-moviesdata= pd.read_csv('../movies.csv')
-tagsdata= pd.read_csv('../tags.csv')
-ratingsdata= pd.read_csv('../ratings.csv')
+moviesdata= pd.read_csv('../../data/movies.csv')
+tagsdata= pd.read_csv('../../data/tags.csv')
+ratingsdata= pd.read_csv('../../data/ratings.csv')
 
 ratingsdata=ratingsdata.sample(n=5000000)
 moviesdata

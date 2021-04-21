@@ -41,7 +41,7 @@ provided a `requirements.txt` file so that the exact environment can be emulated
 1) To train the NCF model simply run the `code/ncf/Train.py` file. This will take some time. The model that will be
 generate will be placed in the same folder.
    
-2) To train the Hybrid model, run the `hybrid/train.py` file. The trained model will be generated and placed in the
+2) To train the Hybrid model, run the `code/hybrid/train.py` file. The trained model will be generated and placed in the
 same folder.
    
 ## Run the application

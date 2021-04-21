@@ -1,20 +1,15 @@
 import pandas as pd
 import numpy as np
 import torch
-from tqdm import tqdm
-import NCFModel
-import pytorch_lightning as pl
-from pprint import pprint
 from flask import Flask
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
-import ast
-from hybrid.predict import HybridUser, AllHybridUsers
+from code.hybrid.predict import HybridUser, AllHybridUsers
 
 np.random.seed(123)
 
-movies = pd.read_csv('../movies.csv')
-ratings = pd.read_csv('../ratings.csv', parse_dates=['timestamp'], nrows=5000000)
+movies = pd.read_csv('../../data/movies.csv')
+ratings = pd.read_csv('../../data/ratings.csv', parse_dates=['timestamp'], nrows=5000000)
 ratings['timestamp'] = ratings['timestamp'].astype(int)
 ratings['rank_latest'] = ratings.groupby(['userId'])['timestamp'].rank(method='first', ascending=False)
 test_ratings = ratings[ratings['rank_latest'] == 1]

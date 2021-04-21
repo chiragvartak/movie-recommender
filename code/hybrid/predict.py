@@ -3,20 +3,20 @@ import pandas as pd
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 
-ratingsdata= pd.read_csv('../ratings.csv')
+ratingsdata= pd.read_csv('../../data/ratings.csv')
 
 ratingsdata=ratingsdata.sample(n=5000000)
 filtered_ratings=ratingsdata.groupby('userId').filter(lambda x:len(x)>= 30)
 mlr = filtered_ratings.movieId.unique().tolist()
 filtered_ratings.drop(['timestamp'],1, inplace=True)
 
-moviesdata= pd.read_csv('../movies.csv')
+moviesdata= pd.read_csv('../../data/movies.csv')
 moviesdata['genres']=moviesdata['genres'].str.replace('|',' ')
 moviesdata=moviesdata[moviesdata.movieId.isin(mlr)]
 
 Mapit = dict(zip(moviesdata.title.tolist(),moviesdata.movieId.tolist()))
 
-algo2 = pickle.load(open("../hybrid/hybrid.model", 'rb'))
+algo2 = pickle.load(open("hybrid.model", 'rb'))
 
 def recommovie2(ui):
     if ui in filtered_ratings.userId.unique():

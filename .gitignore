@@ -135,8 +135,8 @@ dmypy.json
 .DS_Store
 
 # Data files
-ratings.csv
-movies.csv
-tags.csv
-NCFswmProject/trained.model
-hybrid/hybrid.model
+data/ratings.csv
+data/movies.csv
+data/tags.csv
+trained.model
+hybrid.model
