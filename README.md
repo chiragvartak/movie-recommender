@@ -44,6 +44,11 @@ generate will be placed in the same folder.
 2) To train the Hybrid model, run the `hybrid/train.py` file. The trained model will be generated and placed in the
 same folder.
    
+## Run the application
+
+To run the flask application, execute the main method present in `code/ncf/main.py`.
+
+This should start the flask application on Port:5000 of your system. 
 
 ## Caveats
 
@@ -52,3 +57,26 @@ the [PyTorch Official Website](https://pytorch.org/) to install the version that
    
 2) PyTorch installation using pip sometimes gives some `setup.py` errors. Just verify that your Python installation is
 a 64-bit installation. PyTorch does not work on a 32-bit Python installation on Windows.
+
+## UI Application Installation and Setup
+
+### Install the dependencies
+
+1. Install Node.js from: https://nodejs.org/en/download/
+2. Open terminal in the "code/UI" folder and run command "npm install" to install all the dependent packages.
+
+### Run the app
+
+1. Open terminal in the "code/UI" folder and run command "ng serve", this will run the application and serve it on Port : 4200
+2. Open your browser and navigate to http://localhost:4200
+
+### User Id's for testing
+
+When you open the UI application, you will be required to enter the User Id for the user you want to get the recommendations for.
+
+If you use the pre-trained model files, you could use the following user id's to get both NCF and Hybrid recommendations:
+
+1. 2103
+2. 5413
+3. 12
+4. 18768
